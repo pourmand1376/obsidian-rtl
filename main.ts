@@ -1,5 +1,6 @@
 import { App, WorkspaceLeaf, MarkdownView, Plugin, PluginSettingTab, TFile, TAbstractFile, Setting } from 'obsidian';
 import * as codemirror from 'codemirror';
+const YAML = require('yaml')
 
 class Settings {
 	public fileDirections: { [path: string]: string } = {};
