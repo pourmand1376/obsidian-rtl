@@ -8,12 +8,12 @@ class Settings {
 	public setNoteTitleDirection: boolean = true;
 	public setYamlDirection: boolean = false;
 
-	toJson() {
-		return JSON.stringify(this);
+	toYAML() {
+		return YAML.stringify(this);
 	}
 
-	fromJson(content: string) {
-		var obj = JSON.parse(content);
+	fromYAML(content: string) {
+		var obj = YAML.parse(content);
 		this.fileDirections = obj['fileDirections'];
 		this.defaultDirection = obj['defaultDirection'];
 		this.rememberPerFile = obj['rememberPerFile'];
@@ -109,13 +109,13 @@ export default class RtlPlugin extends Plugin {
 	}
 
 	saveSettings() {
-		var settings = this.settings.toJson();
+		var settings = this.settings.toYAML();
 		this.app.vault.adapter.write(this.SETTINGS_PATH, settings);
 	}
 
 	loadSettings() {
 		this.app.vault.adapter.read(this.SETTINGS_PATH).
-			then((content) => this.settings.fromJson(content)).
+			then((content) => this.settings.fromYAML(content)).
 			catch(error => { console.log("RTL settings file not found"); });
 	}
 
